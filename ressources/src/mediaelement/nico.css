@@ -1,0 +1,14 @@
+.mejs__nico-button > button,
+.mejs-nico-button > button {
+  background: url("nico.svg") no-repeat transparent;
+  background-size: 215%;
+}
+.mejs__nico-off > button,
+.mejs-nico-off > button {
+  background-position: -23.7px 1px;
+}
+
+.mejs__nico-on > button,
+.mejs-nico-on > button {
+  background-position: 0 1px;
+}

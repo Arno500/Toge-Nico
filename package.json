@@ -1,0 +1,22 @@
+{
+  "name": "together",
+  "version": "1.0.0",
+  "description": "A simple online video player that sync your video to a central server, and shows user comments on the video itself",
+  "main": "index.js",
+  "dependencies": {
+    "@types/socket.io-client": "^1.4.32",
+    "body-parser": "^1.18.3",
+    "connect-history-api-fallback": "^1.6.0",
+    "express": "^4.16.4",
+    "node-persist": "^3.0.4",
+    "shortid": "^2.2.14",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arno500",
+  "license": "MIT"
+}
