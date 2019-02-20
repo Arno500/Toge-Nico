@@ -9,5 +9,7 @@ USER node
 RUN npm install
 COPY --chown=node:node . .
 
+RUN cd ressources && npm install && npm run build
+
 EXPOSE 3000
 CMD [ "node", "index" ]
