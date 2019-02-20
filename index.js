@@ -156,10 +156,23 @@ io.on("connection", socket => {
   });
 
   socket.on("disconnect", function(data) {
-    onDisconnect(data, socket);
+    let user = users.get(socket.id);
+    if (user && user.timeout) {
+      clearTimeout(user.timeout);
+    }
+    if (user) {
+      room.timeout = setTimeout(
+        () => onDisconnect(data, socket),
+        1000 * 60 * 2
+      );
+      rooms.set(socket.id);
+    }
   });
   socket.on("error", function(data) {
     let user = users.get(socket.id);
+    if (user && user.timeout) {
+      clearTimeout(user.timeout);
+    }
     if (user) {
       room.timeout = setTimeout(
         () => onDisconnect(data, socket),
