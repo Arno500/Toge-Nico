@@ -140,7 +140,7 @@ export default Vue.extend({
         this.player.play();
       }
     },
-    reconnect() {
+    reconnect(data) {
       this.$socket.emit("rooms", {
         operation: "connect",
         data: {
