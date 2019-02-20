@@ -6,7 +6,7 @@ var shortid = require("shortid");
 var bodyParser = require("body-parser");
 var history = require("connect-history-api-fallback");
 
-app.use(express.static("ressources/dist"));
+app.use(express.static("ressources/dist", "/"));
 
 app.use(bodyParser.json());
 
