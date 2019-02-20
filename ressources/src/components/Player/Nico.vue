@@ -79,7 +79,7 @@ p {
 
 @keyframes rightToLeft {
   from {
-    transform: translate3d(105%, 0, 0);
+    transform: translate3d(80vh, 0, 0);
   }
   to {
     transform: translate3d(-110%, 0, 0);
