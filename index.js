@@ -6,13 +6,10 @@ var shortid = require("shortid");
 var bodyParser = require("body-parser");
 var history = require("connect-history-api-fallback");
 
-app.use(express.static("ressources/dist"));
-
 app.use(bodyParser.json());
 
 app.use(
   history({
-    verbose: true,
     rewrites: [
       {
         from: /^\/api\/.*$/,
@@ -24,6 +21,7 @@ app.use(
   })
 );
 
+app.use(express.static("ressources/dist"));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
