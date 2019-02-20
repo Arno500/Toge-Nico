@@ -159,7 +159,21 @@ io.on("connection", socket => {
     onDisconnect(data, socket);
   });
   socket.on("error", function(data) {
-    onDisconnect(data, socket);
+    let user = users.get(socket.id);
+    if (user) {
+      room.timeout = setTimeout(
+        () => onDisconnect(data, socket),
+        1000 * 60 * 5
+      );
+      rooms.set(socket.id);
+    }
+  });
+  socket.on("reconnect", function(data) {
+    let user = users.get(socket.id);
+    if (user & user.timeout) {
+      clearTimeout(user.timeout);
+      users.set(socket.id);
+    }
   });
 });
 
