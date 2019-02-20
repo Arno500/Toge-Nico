@@ -9,9 +9,15 @@ import VueSocketio from "vue-socket.io-extended";
 import vueRessource from "vue-resource";
 import "./plugins/mediaelement";
 
+if (!window.webpackHotUpdate) {
+  var socketioServer = window.location.protocol + "//" + window.location.host;
+} else {
+  var socketioServer = "http://localhost:3000";
+}
+
 Vue.use(
   VueSocketio,
-  io(window.location.protocol + "//" + window.location.host, {
+  io(socketioServer, {
     timeout: 40000
   }),
   { store }

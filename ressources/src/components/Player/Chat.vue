@@ -91,6 +91,7 @@ export default Vue.extend({
   margin-bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
+  width: 85%;
 }
 .msg-container {
   padding: 0.4em;

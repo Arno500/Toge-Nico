@@ -164,7 +164,7 @@ io.on("connection", socket => {
       user.timeout = setTimeout(function() {
         onDisconnect(data, socket);
       }, 1000 * 60 * 2);
-      users.set(socket.id);
+      users.set(socket.id, user);
     }
   });
   socket.on("error", function(data) {
@@ -176,7 +176,7 @@ io.on("connection", socket => {
       user.timeout = setTimeout(function() {
         onDisconnect(data, socket);
       }, 1000 * 60 * 5);
-      users.set(socket.id);
+      users.set(socket.id, user);
     }
   });
   socket.on("reconnect", function(data) {

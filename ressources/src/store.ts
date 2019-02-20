@@ -3,6 +3,18 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+declare global {
+  interface Window {
+    webpackHotUpdate: any;
+  }
+}
+
+if (!window.webpackHotUpdate) {
+  var server = window.location.protocol + "//" + window.location.host;
+} else {
+  var server = "http://localhost:3000";
+}
+
 export default new Vuex.Store({
   state: {
     rooms: Array(),
@@ -121,31 +133,26 @@ export default new Vuex.Store({
       }
     },
     socket_disconnect() {
-      let userConsent = confirm(
-        "Un problème de connexion a été détecté ! Souhaitez vous recharger la page ?"
+      //let userConsent = confirm(
+      //  "Un problème de connexion a été détecté ! Souhaitez vous recharger la page ?"
+      //);
+      //if (userConsent) {
+      //  window.location.reload();
+      //}
+      alert(
+        "Impossible de joindre le serveur. Si vous observez des problèmes, n'hésitez pas à recharger la page."
       );
-      if (userConsent) {
-        window.location.reload();
-      }
     },
     getRooms({ commit }) {
       Vue.http
-        .get(
-          window.location.protocol + "//" + window.location.host + "/api/rooms"
-        )
+        .get(server + "/api/rooms")
         .then((data: any) => commit("addRoom", data.body));
     },
     setupNewRoom({ state }, { roomLink }) {
-      return Vue.http.put(
-        window.location.protocol +
-          "//" +
-          window.location.host +
-          "/api/rooms/add",
-        {
-          video: roomLink,
-          userName: state.user
-        }
-      );
+      return Vue.http.put(server + "/api/rooms/add", {
+        video: roomLink,
+        userName: state.user
+      });
     }
   }
 });
