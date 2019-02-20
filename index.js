@@ -161,10 +161,9 @@ io.on("connection", socket => {
       clearTimeout(user.timeout);
     }
     if (user) {
-      room.timeout = setTimeout(
-        () => onDisconnect(data, socket),
-        1000 * 60 * 2
-      );
+      room.timeout = setTimeout(function() {
+        onDisconnect(data, socket);
+      }, 1000 * 60 * 2);
       rooms.set(socket.id);
     }
   });
@@ -174,10 +173,9 @@ io.on("connection", socket => {
       clearTimeout(user.timeout);
     }
     if (user) {
-      room.timeout = setTimeout(
-        () => onDisconnect(data, socket),
-        1000 * 60 * 5
-      );
+      room.timeout = setTimeout(function() {
+        onDisconnect(data, socket);
+      }, 1000 * 60 * 5);
       rooms.set(socket.id);
     }
   });
