@@ -121,7 +121,12 @@ export default new Vuex.Store({
       }
     },
     socket_disconnect() {
-      window.location.reload();
+      let userConsent = confirm(
+        "Un problème de connexion a été détecté ! Souhaitez vous recharger la page ?"
+      );
+      if (userConsent) {
+        window.location.reload();
+      }
     },
     getRooms({ commit }) {
       Vue.http
