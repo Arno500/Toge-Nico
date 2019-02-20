@@ -139,6 +139,14 @@ export default Vue.extend({
         this.player.setSrc(data.data.link);
         this.player.play();
       }
+    },
+    reconnect() {
+      this.$socket.emit("rooms", {
+        operation: "connect",
+        data: {
+          id: this.id
+        }
+      });
     }
   },
   methods: {

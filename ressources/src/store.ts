@@ -139,9 +139,9 @@ export default new Vuex.Store({
       //if (userConsent) {
       //  window.location.reload();
       //}
-      alert(
-        "Impossible de joindre le serveur. Si vous observez des problèmes, n'hésitez pas à recharger la page."
-      );
+      // alert(
+      //   "Impossible de joindre le serveur. Si vous observez des problèmes, n'hésitez pas àrecharger la page."
+      // );
     },
     getRooms({ commit }) {
       Vue.http
