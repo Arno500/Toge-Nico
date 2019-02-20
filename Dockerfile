@@ -9,7 +9,7 @@ USER node
 RUN npm install
 COPY --chown=node:node . .
 
-RUN cd ressources && sudo apk add python make g++ && npm install && npm run build
+RUN cd ressources && su - -c 'apk add python make g++' && npm install && npm run build
 
 EXPOSE 3000
 CMD [ "node", "index" ]
