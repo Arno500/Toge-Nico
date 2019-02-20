@@ -125,14 +125,22 @@ export default new Vuex.Store({
     },
     getRooms({ commit }) {
       Vue.http
-        .get("http://localhost:3000/api/rooms")
+        .get(
+          window.location.protocol + "//" + window.location.host + "/api/rooms"
+        )
         .then((data: any) => commit("addRoom", data.body));
     },
     setupNewRoom({ state }, { roomLink }) {
-      return Vue.http.put("http://localhost:3000/api/rooms/add", {
-        video: roomLink,
-        userName: state.user
-      });
+      return Vue.http.put(
+        window.location.protocol +
+          "//" +
+          window.location.host +
+          "/api/rooms/add",
+        {
+          video: roomLink,
+          userName: state.user
+        }
+      );
     }
   }
 });
