@@ -10,7 +10,19 @@ app.use(express.static("ressources/dist"));
 
 app.use(bodyParser.json());
 
-app.use(history());
+app.use(
+  history({
+    verbose: true,
+    rewrites: [
+      {
+        from: /^\/api\/.*$/,
+        to: function(context) {
+          return context.parsedUrl.pathname;
+        }
+      }
+    ]
+  })
+);
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
