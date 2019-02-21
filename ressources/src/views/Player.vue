@@ -141,7 +141,7 @@ export default Vue.extend({
       }
     },
     reconnect(data) {
-      $vs.notify({
+      this.$vs.notify({
         title: "Succès",
         text: "Reconnecté au serveur",
         color: "success",
@@ -149,7 +149,7 @@ export default Vue.extend({
       });
     },
     disconnect(data) {
-      $vs.notify({
+      this.$vs.notify({
         title: "Erreur",
         text: "Impossible de joindre le serveur",
         color: "danger",
