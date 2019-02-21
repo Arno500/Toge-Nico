@@ -15,7 +15,8 @@ if (!window.webpackHotUpdate) {
   var socketioServer = "http://localhost:3000";
 }
 const socket = io(socketioServer, {
-  timeout: 40000
+  timeout: 40000,
+  transports: ["websocket"]
 });
 
 Vue.use(VueSocketio, socket, { store });
