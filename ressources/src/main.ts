@@ -14,14 +14,11 @@ if (!window.webpackHotUpdate) {
 } else {
   var socketioServer = "http://localhost:3000";
 }
+const socket = io(socketioServer, {
+  timeout: 40000
+});
 
-Vue.use(
-  VueSocketio,
-  io(socketioServer, {
-    timeout: 40000
-  }),
-  { store }
-);
+Vue.use(VueSocketio, socket, { store });
 Vue.use(vueRessource);
 
 Vue.config.productionTip = false;

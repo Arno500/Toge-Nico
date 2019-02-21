@@ -141,6 +141,7 @@ export default Vue.extend({
       }
     },
     reconnect(data) {
+      console.log(data);
       this.$socket.emit("rooms", {
         operation: "connect",
         data: {
