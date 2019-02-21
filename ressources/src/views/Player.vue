@@ -141,12 +141,19 @@ export default Vue.extend({
       }
     },
     reconnect(data) {
-      console.log(data);
-      this.$socket.emit("rooms", {
-        operation: "connect",
-        data: {
-          id: this.id
-        }
+      this.$vs.notify({
+        title: "Succès",
+        text: "Reconnecté au serveur",
+        color: "success",
+        icon: "check_box"
+      });
+    },
+    disconnect(data) {
+      this.$vs.notify({
+        title: "Erreur",
+        text: "Impossible de joindre le serveur",
+        color: "danger",
+        icon: "error"
       });
     }
   },

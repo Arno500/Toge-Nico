@@ -35,6 +35,7 @@ app.use(function(req, res, next) {
 
 users = new Map();
 rooms = new Map();
+savedRooms = new Map();
 
 app.route("/api/users").get(function(req, res) {
   res.json([...users.values()]);
@@ -84,6 +85,10 @@ io.on("connection", socket => {
       if (data.data.id && currentUser && roomData) {
         roomData.users.push(currentUser.userName);
         rooms.set(data.data.id, roomData);
+        let savedRoom = savedRooms.get(currentUser.userName);
+        if (savedRoom) {
+          socket.join(savedRoom);
+        }
         socket.join("room-" + data.data.id);
         socket.emit("currentRoom", {
           operation: "refreshMessages",
@@ -185,6 +190,12 @@ io.on("connection", socket => {
       clearTimeout(user.timeout);
       users.set(socket.id);
     }
+    if (user && user.userName) {
+      let savedRoom = savedRooms.get(user.userName);
+      if (savedRoom) {
+        socket.join(savedRoom);
+      }
+    }
   });
 });
 
@@ -215,6 +226,10 @@ function onDisconnect(data, socket) {
         }
       });
       console.log(key + " s'est déconnecté :(, fermeture de sa/ses salle.s");
+    }
+    if (currentUser && currentUser.userName) {
+      let savedRoom = Object.keys(socket.rooms);
+      savedRooms.set(currentUser.userName, savedRoom);
     }
     socket.leave("room-" + key);
     if (data.users.length <= 0) {
