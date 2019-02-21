@@ -12,7 +12,7 @@ import "./plugins/mediaelement";
 if (!window.webpackHotUpdate) {
   var socketioServer = window.location.protocol + "//" + window.location.host;
 } else {
-  var socketioServer = "http://localhost:3000";
+  var socketioServer = "http://192.168.43.150:3000";
 }
 const socket = io(socketioServer, {
   timeout: 40000,

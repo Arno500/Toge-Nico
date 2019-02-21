@@ -66,9 +66,26 @@ server.listen(3000, () => console.log("Ready sur le port 3000"));
 
 io.on("connection", socket => {
   socket.on("users", function(data) {
-    users.set(socket.id, { userName: data.userName });
-    console.log("Nouvel utilisateur : ", data);
-    //console.log("Utilisateurs connectés :", users);
+    if (data.operation && data.operation === "reconnect") {
+      users.forEach((value, key) => {
+        if (data && value.userName === data.data.userName) {
+          users.delete(key);
+        }
+      });
+      users.set(socket.id, { userName: data.data.userName });
+      let user = users.get(socket.id);
+      if (user && user.userName) {
+        let savedRoom = savedRooms.get(user.userName);
+        if (savedRoom) {
+          socket.join(savedRoom);
+        }
+        savedRooms.delete(user.userName);
+      }
+    } else {
+      users.set(socket.id, { userName: data.userName });
+      console.log("Nouvel utilisateur : ", data);
+      //console.log("Utilisateurs connectés :", users);
+    }
   });
   socket.on("rooms", function(data) {
     let currentUser = users.get(socket.id);
@@ -85,11 +102,13 @@ io.on("connection", socket => {
       if (data.data.id && currentUser && roomData) {
         roomData.users.push(currentUser.userName);
         rooms.set(data.data.id, roomData);
-        let savedRoom = savedRooms.get(currentUser.userName);
-        if (savedRoom) {
-          socket.join(savedRoom);
-        }
-        socket.join("room-" + data.data.id);
+        socket.join("room-" + data.data.id, function() {
+          if (currentUser && currentUser.userName) {
+            let savedRoom = Object.keys(socket.rooms);
+            savedRooms.set(currentUser.userName, savedRoom);
+          }
+        });
+
         socket.emit("currentRoom", {
           operation: "refreshMessages",
           data: {
@@ -177,6 +196,10 @@ io.on("connection", socket => {
     if (user && user.timeout) {
       clearTimeout(user.timeout);
     }
+    if (user && user.userName) {
+      let savedRoom = Object.keys(socket.rooms);
+      savedRooms.set(user.userName, savedRoom);
+    }
     if (user) {
       user.timeout = setTimeout(function() {
         onDisconnect(data, socket);
@@ -226,10 +249,6 @@ function onDisconnect(data, socket) {
         }
       });
       console.log(key + " s'est déconnecté :(, fermeture de sa/ses salle.s");
-    }
-    if (currentUser && currentUser.userName) {
-      let savedRoom = Object.keys(socket.rooms);
-      savedRooms.set(currentUser.userName, savedRoom);
     }
     socket.leave("room-" + key);
     if (data.users.length <= 0) {

@@ -141,6 +141,13 @@ export default Vue.extend({
       }
     },
     reconnect(data) {
+      this.$socket.emit("users", {
+        operation: "reconnect",
+        data: {
+          roomId: this.id,
+          userName: this.$store.state.user
+        }
+      });
       this.$vs.notify({
         title: "Succès",
         text: "Reconnecté au serveur",
