@@ -8,11 +8,18 @@ import io from "socket.io-client";
 import VueSocketio from "vue-socket.io-extended";
 import vueRessource from "vue-resource";
 import "./plugins/mediaelement";
+import localForage from "localforage";
+
+localForage.config({
+  name: "Togenico",
+  storeName: "Togenico_settings"
+});
 
 if (!window.webpackHotUpdate) {
   var socketioServer = window.location.protocol + "//" + window.location.host;
 } else {
-  var socketioServer = "http://192.168.43.150:3000";
+  //var socketioServer = "http://192.168.43.150:3000";
+  var socketioServer = "http://localhost:3000";
 }
 const socket = io(socketioServer, {
   timeout: 40000,
@@ -45,5 +52,10 @@ new Vue({
   render: h => h(App),
   mounted() {
     this.$store.dispatch("getRooms");
+    localForage
+      .getItem("username")
+      .then(uname =>
+        uname ? this.$store.dispatch("setUserName", uname) : null
+      );
   }
 }).$mount("#app");

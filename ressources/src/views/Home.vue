@@ -47,12 +47,22 @@ import router from "../router";
       userName: ""
     };
   },
+  computed: {
+    connected() {
+      return this.$store.state.connected;
+    }
+  },
+  watch: {
+    connected() {
+      if (this.connected === true) {
+        router.replace(this.$route.query.redirect || "rooms");
+      }
+    }
+  },
   methods: {
     startTheGame() {
       if (this.$data.userName !== "") {
-        this.$socket.emit("users", { userName: this.$data.userName });
-        this.$store.commit("setConnection", true);
-        this.$store.commit("setUser", this.$data.userName);
+        this.$store.dispatch("setUserName", this.$data.userName);
         router.replace(this.$route.query.redirect || "rooms");
       }
     }

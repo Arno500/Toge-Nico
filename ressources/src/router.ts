@@ -19,7 +19,7 @@ export default new Router({
       path: "/rooms",
       name: "rooms",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Rooms.vue"),
+        import(/* webpackChunkName: "rooms" */ "./views/Rooms.vue"),
       meta: {
         title: "Liste des salles - TogeNico"
       }
@@ -29,7 +29,7 @@ export default new Router({
       name: "player",
       props: true,
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Player.vue"),
+        import(/* webpackChunkName: "player" */ "./views/Player.vue"),
       meta: {
         title: "Lecteur - TogeNico"
       }

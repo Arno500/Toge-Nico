@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import localForage from "localforage";
 
 Vue.use(Vuex);
 
@@ -12,7 +13,8 @@ declare global {
 if (!window.webpackHotUpdate) {
   var server = window.location.protocol + "//" + window.location.host;
 } else {
-  var server = "http://192.168.43.150:3000";
+  //var server = "http://192.168.43.150:3000";
+  var server = "http://localhost:3000";
 }
 
 export default new Vuex.Store({
@@ -70,6 +72,7 @@ export default new Vuex.Store({
     },
     setUser(state, username) {
       state.user = username;
+      localForage.setItem("username", username);
     },
     setCurrentRoom(state, roomId) {
       state.currentRoom = roomId;
@@ -153,6 +156,11 @@ export default new Vuex.Store({
         video: roomLink,
         userName: state.user
       });
+    },
+    setUserName({ commit }, uname) {
+      this._vm.$socket.emit("users", { userName: uname });
+      commit("setConnection", true);
+      commit("setUser", uname);
     }
   }
 });
