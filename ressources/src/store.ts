@@ -11,10 +11,10 @@ declare global {
 }
 
 if (!window.webpackHotUpdate) {
-  const server = window.location.protocol + "//" + window.location.host;
+  var server = window.location.protocol + "//" + window.location.host;
 } else {
   // var server = "http://192.168.43.150:3000";
-  const server = "http://localhost:3000";
+  var server = "http://localhost:3000";
 }
 
 interface TrickyStore extends Store<any> {
