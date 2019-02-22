@@ -4,6 +4,12 @@ import localForage from "localforage";
 
 Vue.use(Vuex);
 
+declare global {
+  interface Window {
+    webpackHotUpdate: any;
+  }
+}
+
 if (!window.webpackHotUpdate) {
   const server = window.location.protocol + "//" + window.location.host;
 } else {
