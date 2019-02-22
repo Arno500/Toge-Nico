@@ -1,1 +1,1 @@
-declare module "vuesax";
+declare module 'vuesax';

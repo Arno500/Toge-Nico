@@ -1,43 +1,43 @@
-import Vue from "vue";
-import Router from "vue-router";
-import Home from "./views/Home.vue";
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from './views/Home.vue';
 
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
+  mode: 'history',
   routes: [
     {
-      path: "/",
-      name: "home",
+      path: '/',
+      name: 'home',
       component: Home,
       meta: {
-        title: "TogeNico"
-      }
+        title: 'TogeNico',
+      },
     },
     {
-      path: "/rooms",
-      name: "rooms",
+      path: '/rooms',
+      name: 'rooms',
       component: () =>
-        import(/* webpackChunkName: "rooms" */ "./views/Rooms.vue"),
+        import(/* webpackChunkName: "rooms" */ './views/Rooms.vue'),
       meta: {
-        title: "Liste des salles - TogeNico"
-      }
+        title: 'Liste des salles - TogeNico',
+      },
     },
     {
-      path: "/room/:id",
-      name: "player",
+      path: '/room/:id',
+      name: 'player',
       props: true,
       component: () =>
-        import(/* webpackChunkName: "player" */ "./views/Player.vue"),
+        import(/* webpackChunkName: "player" */ './views/Player.vue'),
       meta: {
-        title: "Lecteur - TogeNico"
-      }
+        title: 'Lecteur - TogeNico',
+      },
     },
     {
-      path: "*",
-      name: "not-found",
-      redirect: "rooms"
-    }
-  ]
+      path: '*',
+      name: 'not-found',
+      redirect: 'rooms',
+    },
+  ],
 });

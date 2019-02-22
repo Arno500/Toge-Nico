@@ -1,1 +1,1 @@
-declare module "vue-socket.io";
+declare module 'vue-socket.io';

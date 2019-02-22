@@ -1,2 +1,2 @@
-declare module "vue-socket.io";
-declare module "vuesax";
+declare module 'vue-socket.io';
+declare module 'vuesax';

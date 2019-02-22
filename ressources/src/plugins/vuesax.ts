@@ -1,4 +1,4 @@
-import Vue from "vue";
+import Vue from 'vue';
 // import {
 //   vsList,
 //   vsIcon,
@@ -10,10 +10,10 @@ import Vue from "vue";
 //   vsRow,
 //   vsTooltip
 // } from "vuesax";
-import Vuesax from "vuesax";
+import Vuesax from 'vuesax';
 
-import "vuesax/dist/vuesax.css";
-import "material-icons/iconfont/material-icons.css";
+import 'vuesax/dist/vuesax.css';
+import 'material-icons/iconfont/material-icons.css';
 
 // Vue.use(vsList);
 // Vue.use(vsIcon);
