@@ -74,7 +74,9 @@ p {
   font-size: 4rem;
   text-shadow: 4px 3px 0 #7a7a7a;
   -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
 @keyframes rightToLeft {
