@@ -102,6 +102,7 @@ export default Vue.extend({
     border-radius: 5px;
     padding: 0.8em 2em;
     margin: 0.4em;
+    word-break: break-word;
     .username {
       font-weight: bold;
     }
