@@ -150,6 +150,9 @@ export default new Vuex.Store({
       //   "Impossible de joindre le serveur. Si vous observez des problèmes, n'hésitez pas àrecharger la page."
       // );
     },
+    socket_reconnect({ state }) {
+      (<any>this)._vm.$socket.emit("reconnect_data", { userName: state.user });
+    },
     getRooms({ commit }) {
       Vue.http
         .get(server + "/api/rooms")

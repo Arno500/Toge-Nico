@@ -36,6 +36,7 @@ app.use(function(req, res, next) {
 users = new Map();
 rooms = new Map();
 savedRooms = new Map();
+disconnectedUsersSocket = new Map();
 
 app.route("/api/users").get(function(req, res) {
   res.json([...users.values()]);
@@ -189,6 +190,7 @@ io.on("connection", socket => {
         onDisconnect(data, socket);
       }, 1000 * 60 * 2);
       users.set(socket.id, user);
+      disconnectedUsersSocket.set(user.userName, socket.id);
     }
   });
   socket.on("error", function(data) {
@@ -205,6 +207,7 @@ io.on("connection", socket => {
         onDisconnect(data, socket);
       }, 1000 * 60 * 5);
       users.set(socket.id, user);
+      disconnectedUsersSocket.set(user.userName, socket.id);
     }
   });
   socket.on("reconnect", function(data) {
@@ -217,6 +220,16 @@ io.on("connection", socket => {
       let savedRoom = savedRooms.get(user.userName);
       if (savedRoom) {
         socket.join(savedRoom);
+      }
+    }
+  });
+
+  socket.on("reconnect_data", function(data) {
+    let oldSocket = disconnectedUsersSocket.get(data.userName);
+    if (oldSocket) {
+      let oldUser = users.get(oldSocket);
+      if (oldUser) {
+        clearTimeout(oldUser.timeout);
       }
     }
   });
