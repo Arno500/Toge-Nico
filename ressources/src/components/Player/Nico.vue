@@ -47,6 +47,11 @@ export default Vue.extend({
         top,
         opacity
       };
+    },
+    getFullscreenSize() {
+      return {
+        width: this.fullscreen ? "100vw" : "100%"
+      };
     }
   }
 });
@@ -81,7 +86,7 @@ p {
 
 @keyframes rightToLeft {
   from {
-    transform: translate3d(80vw, 0, 0);
+    transform: translate3d(100vw, 0, 0);
   }
   to {
     transform: translate3d(-110%, 0, 0);
