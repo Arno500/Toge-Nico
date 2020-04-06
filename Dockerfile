@@ -6,10 +6,10 @@ WORKDIR /home/node/app
 COPY package*.json ./
 USER node
 
-RUN npm install
+RUN yarn
 COPY --chown=node:node . .
 
-RUN cd ressources && npm install && npm run build
+RUN cd ressources && yarn install && yarn build
 
 EXPOSE 3000
 CMD [ "node", "index" ]
