@@ -10,7 +10,7 @@
     "express": "^4.17.1",
     "node-persist": "^3.0.5",
     "shortid": "^2.2.14",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.4.0",
     "socket.io-client": "^2.2.0"
   },
   "devDependencies": {},
